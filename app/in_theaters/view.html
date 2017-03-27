@@ -1,0 +1,35 @@
+<h1 class="page-header">正在热映</h1>
+<h2 ng-if="message">{{message}}</h2>
+<div class="list-group">
+	<a href="#" class="list-group-item" ng-repeat="item in films">
+		<span class="badge">{{item.rating.average}}</span>
+		<div class="media">
+			<div class="pull-left">
+				<img class="media-object" ng-src="{{item.images.small}}" alt="...">
+			</div>
+			<div class="media-body">
+				<h3 class="media-heading">{{item.title}}</h3>
+				<p>导演: <span ng-repeat="dir in item.directors">{{dir.name}}
+				<span ng-if="!$last">、</span>
+				</span></p>
+				<p>类型: <span>{{item.genres.join('、')}}</span></p>
+				<p>主角: <span ng-repeat="cast in item.casts">{{cast.name}}
+				<span ng-if="!$last">、</span>
+				</span></p>
+			</div>
+		</div>
+	</a>
+</div>
+<div ng-show="!loading">共有{{total}}条数据,{{pageCount}}页
+<ul class="pager">
+	<li ng-class="{disabled:currentPage<=1?true:false}"><a ng-click="go(currentPage-1)">上一页</a></li>
+	<li ng-class="{disabled:currentPage>=pageCount?true:false}"><a ng-click="go(currentPage+1)">下一页</a></li>
+</ul>
+</div>
+<div class="mask" ng-show="loading">
+	<div class="spinner">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
+</div>
