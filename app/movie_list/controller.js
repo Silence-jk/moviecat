@@ -1,15 +1,15 @@
 (function (angular) {
 	'use strict';
-	var module = angular.module('moviecat.in_theater', ['ngRoute','moviecat.services.http'])
+	var module = angular.module('moviecat.movie_list', ['ngRoute','moviecat.services.http'])
 
 	module.config(['$routeProvider', function ($routeProvider) {
-		$routeProvider.when('/in_theaters/:page', {
-			templateUrl: 'in_theaters/view.html',
-			controller: 'InTheaterController'
+		$routeProvider.when('/:category/:page', {
+			templateUrl: 'movie_list/view.html',
+			controller: 'MovieListController'
 		});
 	}])
 
-	module.controller('InTheaterController', ['$scope','$route','$routeParams','HttpService',
+	module.controller('MovieListController', ['$scope','$route','$routeParams','HttpService',
 		function ($scope,$route,$routeParams,HttpService) {
 		//分页处理
 		var count=10;//每页显示10条
@@ -20,7 +20,7 @@
 		$scope.message='';
 		$scope.pageCount=0;
 		$scope.currentPage=page;
-		HttpService.jsonp('http://api.douban.com/v2/movie/in_theaters',{
+		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,{
 			start:start,
 			count:count
 		}, function (data) {

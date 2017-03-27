@@ -22,12 +22,6 @@
 			<a class="navbar-brand" href="#">豆瓣电影</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Help</a></li>
-			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
 			</form>
@@ -37,16 +31,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3 col-md-2 sidebar">
-			<!-- <ul class="nav nav-sidebar" ng-controller="NavController">
+			<ul class="nav nav-sidebar" ng-controller="NavController">
               <li ng-class="{active:type=='in_theaters'}"><a href="#/in_theaters/1">正在热映</a></li>
               <li ng-class="{active:type=='coming_soon'}"><a href="#/coming_soon/1">即将上映</a></li>
               <li ng-class="{active:type=='top250'}"><a href="#/top250/1">TOP</a></li>
-            </ul> -->
-			<ul class="nav nav-sidebar">
-				<li auto-focus class="active"><a href="#/in_theaters/1">正在热映</a></li>
-				<li auto-focus><a href="#/coming_soon/1">即将上映</a></li>
-				<li auto-focus><a href="#/top250/1">TOP</a></li>
-			</ul>
+            </ul>
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div>
 	</div>
@@ -60,8 +49,6 @@
 <script src="app.js"></script>
 <script src="components/http.js"></script>
 <!--子模块-->
-<script src="in_theaters/controller.js"></script>
-<script src="coming_soon/controller.js"></script>
-<script src="top250/controller.js"></script>
+<script src="movie_list/controller.js"></script>
 </body>
 </html>
