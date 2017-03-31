@@ -9,17 +9,24 @@
 	http.service('HttpService',['$window','$document', function ($window,$document) {
 		console.log($window);
 		this.jsonp=function(url, data, callback) {
-			var fnSuffix = Math.random().toString().replace('.', '');
-			var cbFuncName = 'my_json_cb_' + fnSuffix;
-
-			$window[cbFuncName] = callback;
+			if(typeof data == 'function'){
+				data=callback;
+			}
 			var querystring = url.indexOf('?') == -1 ? '?' : '&';
 			for (var key in data) {
 				querystring += key + '=' + data[key] + '&';
 			}
+			var fnSuffix = Math.random().toString().replace('.', '');
+			var cbFuncName = 'my_json_cb_' + fnSuffix;
 			querystring += 'callback=' + cbFuncName;
 			var scriptElement = $document[0].createElement('script');
 			scriptElement.src = url + querystring;
+			$window[cbFuncName] = function (data) {
+				callback(data);
+				//脚本加载完成（即回调函数执行完成）后就清除,防止jsonp大量在页面堆积脚本
+				$document[0].body.removeChild(scriptElement);
+			};
+
 			$document[0].body.appendChild(scriptElement);
 		};
 	}])

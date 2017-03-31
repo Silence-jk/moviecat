@@ -3,16 +3,17 @@
 	var module = angular.module('moviecat.movie_list', ['ngRoute','moviecat.services.http'])
 
 	module.config(['$routeProvider', function ($routeProvider) {
+		console.log('222');
 		$routeProvider.when('/:category/:page', {
 			templateUrl: 'movie_list/view.html',
 			controller: 'MovieListController'
 		});
 	}])
 
-	module.controller('MovieListController', ['$scope','$route','$routeParams','HttpService',
-		function ($scope,$route,$routeParams,HttpService) {
+	module.controller('MovieListController', ['$scope','$route','$routeParams','HttpService','AppConfig',
+		function ($scope,$route,$routeParams,HttpService,AppConfig) {
 		//分页处理
-		var count=10;//每页显示10条
+		var count=AppConfig.pageSize;//每页显示10条
 		var page=parseInt($routeParams.page);
 		var start=(page-1)*10;
 		$scope.loading=true;
@@ -20,9 +21,11 @@
 		$scope.message='';
 		$scope.pageCount=0;
 		$scope.currentPage=page;
-		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,{
+		HttpService.jsonp(AppConfig.listApiAddress+$routeParams.category,{
 			start:start,
-			count:count
+			count:count,
+			// $routeParams 的数据来源：1.路由匹配出来的，2.?后的参数
+			q:$routeParams.q
 		}, function (data) {
 			console.log(data);
 			$scope.films=data.subjects;

@@ -22,8 +22,8 @@
 			<a class="navbar-brand" href="#">豆瓣电影</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
+			<form class="navbar-form navbar-right" ng-controller="SearchController" ng-submit="search()">
+				<input type="text" class="form-control" ng-model="input" placeholder="Search...">
 			</form>
 		</div>
 	</div>
@@ -43,12 +43,14 @@
 
 <script src="../node_modules/angular/angular.js"></script>
 <script src="../node_modules/angular-route/angular-route.js"></script>
+<!--angular-loader在使用一些异步加载的库的时候，自动控制加载顺序-->
 <script src="../node_modules/angular-loader/angular-loader.min.js"></script>
 <script src="../node_modules/angular-mocks/angular-mocks.js"></script>
 <!--主模块-->
 <script src="app.js"></script>
 <script src="components/http.js"></script>
 <!--子模块-->
+<script src="movie_detail/controller.js"></script>
 <script src="movie_list/controller.js"></script>
 </body>
 </html>

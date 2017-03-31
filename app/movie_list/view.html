@@ -1,7 +1,7 @@
 <h1 class="page-header">正在热映</h1>
 <h2 ng-if="message">{{message}}</h2>
 <div class="list-group">
-	<a href="#" class="list-group-item" ng-repeat="item in films">
+	<a href="#detail/{{item.id}}" class="list-group-item" ng-repeat="item in films">
 		<span class="badge">{{item.rating.average}}</span>
 		<div class="media">
 			<div class="pull-left">
